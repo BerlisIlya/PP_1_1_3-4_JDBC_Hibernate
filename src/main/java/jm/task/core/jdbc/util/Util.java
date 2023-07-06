@@ -12,7 +12,7 @@ public class Util {
     private static final String DB_USER = "BerlIS";
     private static final String DB_PASSWORD = "<thkBC1990";
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         Connection connection = null;
 
         try {

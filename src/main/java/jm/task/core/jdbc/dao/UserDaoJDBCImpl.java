@@ -7,9 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jm.task.core.jdbc.util.Util.getConnection;
+
 public class UserDaoJDBCImpl implements UserDao {
-    Util util = new Util();
-    private Connection connection = util.getConnection();
+    private final Connection connection = getConnection();
 
     public UserDaoJDBCImpl() {
     }
@@ -73,8 +74,8 @@ public class UserDaoJDBCImpl implements UserDao {
         List<User> userList = new ArrayList<>();
         String getUsers = "SELECT * FROM USERS";
 
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(getUsers)){
+        try (PreparedStatement statement = connection.prepareStatement(getUsers);
+             ResultSet resultSet = statement.executeQuery()){
 
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
